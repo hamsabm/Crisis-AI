@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+redis
+scikit-learn
+numpy
+joblib
+aiohttp
+openai
+polyline

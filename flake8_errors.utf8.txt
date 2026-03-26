@@ -1,0 +1,147 @@
+﻿src\main.py:3:1: F401 'typing.List' imported but unused
+src\main.py:28:1: E302 expected 2 blank lines, found 1
+src\main.py:35:1: E302 expected 2 blank lines, found 1
+src\main.py:41:1: E302 expected 2 blank lines, found 1
+src\main.py:44:1: E302 expected 2 blank lines, found 1
+src\main.py:45:9: E261 at least two spaces before inline comment
+src\main.py:47:1: E302 expected 2 blank lines, found 1
+src\main.py:48:80: E501 line too long (90 > 79 characters)
+src\main.py:56:1: W293 blank line contains whitespace
+src\main.py:59:1: W293 blank line contains whitespace
+src\main.py:62:1: W293 blank line contains whitespace
+src\main.py:65:1: W293 blank line contains whitespace
+src\main.py:70:1: E302 expected 2 blank lines, found 1
+src\main.py:72:1: W293 blank line contains whitespace
+src\main.py:79:1: W293 blank line contains whitespace
+src\main.py:87:1: W293 blank line contains whitespace
+src\main.py:93:1: W293 blank line contains whitespace
+src\main.py:100:1: W293 blank line contains whitespace
+src\main.py:111:1: W293 blank line contains whitespace
+src\main.py:124:1: E302 expected 2 blank lines, found 1
+src\main.py:127:1: E302 expected 2 blank lines, found 1
+src\main.py:127:80: E501 line too long (89 > 79 characters)
+src\main.py:130:1: E302 expected 2 blank lines, found 1
+src\main.py:130:80: E501 line too long (86 > 79 characters)
+src\main.py:133:1: E302 expected 2 blank lines, found 1
+src\main.py:133:80: E501 line too long (115 > 79 characters)
+src\main.py:136:1: E302 expected 2 blank lines, found 1
+src\main.py:136:80: E501 line too long (80 > 79 characters)
+src\main.py:139:1: E302 expected 2 blank lines, found 1
+src\main.py:148:1: E302 expected 2 blank lines, found 1
+src\main.py:150:1: W293 blank line contains whitespace
+src\main.py:153:1: W293 blank line contains whitespace
+src\main.py:174:1: W293 blank line contains whitespace
+src\main.py:180:1: W293 blank line contains whitespace
+src\main.py:191:1: E302 expected 2 blank lines, found 1
+src\main.py:199:1: E302 expected 2 blank lines, found 1
+src\main.py:207:1: W293 blank line contains whitespace
+src\main.py:210:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:2:1: F401 'typing.Dict' imported but unused
+src\services\evacuation_planner.py:2:1: F401 'typing.Optional' imported but unused
+src\services\evacuation_planner.py:4:1: F401 'polyline' imported but unused
+src\services\evacuation_planner.py:6:1: E302 expected 2 blank lines, found 1
+src\services\evacuation_planner.py:16:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:24:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:30:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:35:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:43:54: W291 trailing whitespace
+src\services\evacuation_planner.py:61:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:63:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:72:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:74:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:77:80: E501 line too long (84 > 79 characters)
+src\services\evacuation_planner.py:84:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:94:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:102:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:104:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:111:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:118:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:120:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:124:48: W291 trailing whitespace
+src\services\evacuation_planner.py:128:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:137:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:147:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:152:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:156:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:159:80: E501 line too long (80 > 79 characters)
+src\services\evacuation_planner.py:160:80: E501 line too long (81 > 79 characters)
+src\services\evacuation_planner.py:163:80: E501 line too long (81 > 79 characters)
+src\services\evacuation_planner.py:172:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:174:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:181:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:189:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:193:54: E231 missing whitespace after ','
+src\services\evacuation_planner.py:198:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:201:43: E231 missing whitespace after ','
+src\services\evacuation_planner.py:204:1: W293 blank line contains whitespace
+src\services\evacuation_planner.py:207:80: E501 line too long (92 > 79 characters)
+src\services\impact_prediction.py:2:80: E501 line too long (113 > 79 characters)
+src\services\impact_prediction.py:9:1: W293 blank line contains whitespace
+src\services\impact_prediction.py:10:80: E501 line too long (92 > 79 characters)
+src\services\llm_service.py:2:1: F401 'typing.Dict' imported but unused
+src\services\llm_service.py:6:1: E302 expected 2 blank lines, found 1
+src\services\llm_service.py:8:80: E501 line too long (90 > 79 characters)
+src\services\llm_service.py:12:1: W293 blank line contains whitespace
+src\services\llm_service.py:21:1: W293 blank line contains whitespace
+src\services\llm_service.py:25:1: W293 blank line contains whitespace
+src\services\llm_service.py:32:80: E501 line too long (253 > 79 characters)
+src\services\llm_service.py:39:1: W293 blank line contains whitespace
+src\services\llm_service.py:42:1: W293 blank line contains whitespace
+src\services\llm_service.py:46:1: W293 blank line contains whitespace
+src\services\llm_service.py:56:1: W293 blank line contains whitespace
+src\services\llm_service.py:60:1: W293 blank line contains whitespace
+src\services\llm_service.py:62:80: E501 line too long (86 > 79 characters)
+src\services\llm_service.py:65:1: W293 blank line contains whitespace
+src\services\llm_service.py:68:80: E501 line too long (82 > 79 characters)
+src\services\llm_service.py:69:1: W293 blank line contains whitespace
+src\services\llm_service.py:72:42: W291 trailing whitespace
+src\services\llm_service.py:76:1: W293 blank line contains whitespace
+src\services\llm_service.py:79:1: W293 blank line contains whitespace
+src\services\llm_service.py:84:1: W293 blank line contains whitespace
+src\services\llm_service.py:92:1: W293 blank line contains whitespace
+src\services\llm_service.py:94:1: W293 blank line contains whitespace
+src\services\llm_service.py:102:80: E501 line too long (130 > 79 characters)
+src\services\llm_service.py:112:80: E501 line too long (93 > 79 characters)
+src\services\llm_service.py:113:1: W293 blank line contains whitespace
+src\services\llm_service.py:120:1: W293 blank line contains whitespace
+src\services\llm_service.py:123:80: E501 line too long (80 > 79 characters)
+src\services\llm_service.py:128:1: W293 blank line contains whitespace
+src\services\llm_service.py:133:80: E501 line too long (95 > 79 characters)
+src\services\llm_service.py:146:1: W293 blank line contains whitespace
+src\services\llm_service.py:148:1: W293 blank line contains whitespace
+src\services\llm_service.py:156:1: W293 blank line contains whitespace
+src\services\llm_service.py:159:1: W293 blank line contains whitespace
+src\services\llm_service.py:162:1: W293 blank line contains whitespace
+src\services\llm_service.py:165:1: W293 blank line contains whitespace
+src\services\llm_service.py:170:1: W293 blank line contains whitespace
+src\services\llm_service.py:173:1: W293 blank line contains whitespace
+src\services\llm_service.py:180:80: E501 line too long (119 > 79 characters)
+src\services\risk_assessment.py:1:1: F401 'numpy as np' imported but unused
+src\services\risk_assessment.py:2:1: F401 'sklearn.ensemble.GradientBoostingClassifier' imported but unused
+src\services\risk_assessment.py:4:1: F401 'typing.Dict' imported but unused
+src\services\risk_assessment.py:8:1: E302 expected 2 blank lines, found 1
+src\services\risk_assessment.py:34:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:39:9: E722 do not use bare 'except'
+src\services\risk_assessment.py:42:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:50:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:53:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:56:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:58:80: E501 line too long (80 > 79 characters)
+src\services\risk_assessment.py:59:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:62:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:70:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:73:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:76:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:84:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:88:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:90:19: F541 f-string is missing placeholders
+src\services\risk_assessment.py:109:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:111:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:117:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:126:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:136:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:145:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:147:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:153:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:156:1: W293 blank line contains whitespace
+src\services\risk_assessment.py:166:1: W293 blank line contains whitespace
