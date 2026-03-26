@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaUser, FaFireExtinguisher, FaShieldAlt, FaArrowLeft, FaServer } from 'react-icons/fa';
+import { FaUser, FaFireExtinguisher, FaArrowLeft, FaServer } from 'react-icons/fa';
 import type { UserRole } from '../App';
 
 interface LoginPageProps {
