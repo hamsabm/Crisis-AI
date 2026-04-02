@@ -63,8 +63,7 @@ export function DisasterNewsCard() {
               color: '#fff',
               fontWeight: 'bold',
               borderRadius: '12px'
-            },
-            icon: <FaExclamationCircle />
+            }
           });
         }
       } catch (err) {
@@ -79,7 +78,7 @@ export function DisasterNewsCard() {
       navigator.geolocation.getCurrentPosition((position) => {
         fetchNews(position.coords.latitude, position.coords.longitude);
       }, (err) => {
-        console.warn("Geolocation blocked, using default location (New Delhi, India).", err);
+        console.warn("Geolocation blocked, New Delhi fallback active.", err);
         fetchNews(28.6139, 77.2090);
       });
     } else {
@@ -90,11 +89,9 @@ export function DisasterNewsCard() {
   const handleProtocolClick = () => {
     setIsSOSActive(true);
     setSosStep(0);
-    
-    // Animate the SOS protocol steps
-    setTimeout(() => setSosStep(1), 1500); // Notifications
-    setTimeout(() => setSosStep(2), 3000); // Searching Safe Zone
-    setTimeout(() => setSosStep(3), 4500); // Results
+    setTimeout(() => setSosStep(1), 1500); 
+    setTimeout(() => setSosStep(2), 3000); 
+    setTimeout(() => setSosStep(3), 4500); 
   };
 
   const closeSOS = () => {
@@ -103,109 +100,109 @@ export function DisasterNewsCard() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* SOS OVERLAY MODAL */}
+    <div className="flex flex-col gap-4 w-full">
+      {/* MOBILE-POWERED SOS MODAL */}
       {isSOSActive && (
-        <div className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4">
-           {/* ALARM BACKGROUND PULSE */}
-           <div className="absolute inset-0 bg-red-600/5 animate-pulse-slow"></div>
+        <div className="fixed inset-0 z-[99999] bg-black/98 flex items-center justify-center overflow-auto">
+           {/* ALARM PULSE */}
+           <div className="absolute inset-0 bg-red-600/5 animate-pulse-slow pointer-events-none"></div>
            
-           <div className="relative w-full max-w-2xl bg-[#060d1a] border border-red-500/40 rounded-[32px] overflow-hidden shadow-[0_0_100px_rgba(239,68,68,0.3)]">
+           <div className="relative w-full h-full md:h-auto md:max-w-2xl bg-[#060d1a] md:border md:border-red-500/40 md:rounded-[40px] flex flex-col md:shadow-[0_0_120px_rgba(239,68,68,0.4)]">
               {/* Header */}
-              <div className="bg-red-600 p-6 flex justify-between items-center">
+              <div className="bg-red-600 p-6 flex justify-between items-center shrink-0">
                  <div className="flex items-center gap-4">
-                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-600 shadow-lg animate-bounce">
-                     <FaExclamationCircle className="text-2xl" />
-                   </div>
-                   <div>
-                     <h2 className="text-2xl font-black tracking-tighter text-white uppercase italic">Active Emergency Protocol</h2>
-                     <p className="text-[10px] text-red-100 font-black tracking-[4px] uppercase opacity-80">Crisis Response Hub — IND.001</p>
+                   <FaExclamationCircle className="text-3xl text-white animate-bounce" />
+                   <div className="text-white">
+                     <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-tighter">Emergency Hub</h2>
+                     <p className="text-[10px] font-bold tracking-[3px] opacity-70 uppercase">Protocol Secured IND-001</p>
                    </div>
                  </div>
-                 <button onClick={closeSOS} className="p-2 hover:bg-black/20 rounded-full transition text-white">
-                   <FaTimesCircle className="text-2xl" />
+                 <button onClick={closeSOS} className="p-3 text-white/50 hover:text-white transition">
+                   <FaTimesCircle className="text-3xl" />
                  </button>
               </div>
 
-              {/* Body */}
-              <div className="p-10 space-y-8">
-                 {/* STEP 1: NOTIFICATIONS */}
-                 <div className={`flex items-start gap-6 transition-all duration-500 ${sosStep >= 1 ? 'opacity-100 translate-x-0' : 'opacity-20 -translate-x-4'}`}>
-                    <div className="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center shrink-0 border border-blue-500/30">
-                       <FaSatellite className={sosStep === 1 ? 'animate-spin' : ''} />
-                    </div>
+              {/* Progress Flow */}
+              <div className="flex-1 overflow-y-auto p-10 space-y-10">
+                 {/* Step 1 */}
+                 <div className={`flex items-start gap-6 transition-all ${sosStep >= 1 ? 'opacity-100' : 'opacity-20'}`}>
+                    <FaSatellite className={`text-3xl text-blue-400 shrink-0 ${sosStep === 1 ? 'animate-spin' : ''}`} />
                     <div>
-                      <h4 className="font-black text-white uppercase tracking-widest text-sm mb-1">Broadcasting Alerts</h4>
-                      <p className="text-slate-400 text-xs leading-relaxed">Notifications being pushed to 14,000+ regional inhabitants and local first responders.</p>
-                      {sosStep === 1 && <span className="text-[10px] font-black text-blue-400 animate-pulse mt-2 block">TRANSMITTING...</span>}
-                      {sosStep > 1 && <span className="text-[10px] font-black text-emerald-400 mt-2 block">COMPLETED ✓</span>}
+                      <h4 className="font-black text-white text-sm uppercase tracking-widest">Broadcasting Alert Matrix</h4>
+                      <p className="text-slate-500 text-xs mt-1">Transmitting priority alerts to 14k+ regional inwoners.</p>
+                      {sosStep === 1 && <span className="text-[10px] text-blue-400 font-bold block mt-2">TRANSCEIVING...</span>}
+                      {sosStep > 1 && <span className="text-[10px] text-emerald-400 font-bold block mt-2">LINK ESTABLISHED ✓</span>}
                     </div>
                  </div>
 
-                 {/* STEP 2: SEARCHING SAFE ZONE */}
-                 <div className={`flex items-start gap-6 transition-all duration-500 ${sosStep >= 2 ? 'opacity-100 translate-x-0' : 'opacity-20 -translate-x-4'}`}>
-                    <div className="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-2xl flex items-center justify-center shrink-0 border border-purple-500/30">
-                       <FaMapMarkerAlt className={sosStep === 2 ? 'animate-pulse' : ''} />
-                    </div>
+                 {/* Step 2 */}
+                 <div className={`flex items-start gap-6 transition-all ${sosStep >= 2 ? 'opacity-100' : 'opacity-20'}`}>
+                    <FaMapMarkerAlt className={`text-3xl text-purple-400 shrink-0 ${sosStep === 2 ? 'animate-pulse' : ''}`} />
                     <div>
-                      <h4 className="font-black text-white uppercase tracking-widest text-sm mb-1">Neural Safe Zone Scan</h4>
-                      <p className="text-slate-400 text-xs leading-relaxed">Cross-referencing topographical data with crowd density to identify optimal safe sectors.</p>
-                      {sosStep === 2 && <span className="text-[10px] font-black text-purple-400 animate-pulse mt-2 block">LOCALIZING OPTIMAL SECTOR...</span>}
-                      {sosStep > 2 && <span className="text-[10px] font-black text-emerald-400 mt-2 block">FOUND ✓</span>}
+                      <h4 className="font-black text-white text-sm uppercase tracking-widest">Secure Zone Localization</h4>
+                      <p className="text-slate-500 text-xs mt-1">Calculating geolocated high-safety terrain.</p>
+                      {sosStep === 2 && <span className="text-[10px] text-purple-400 font-bold block mt-2">SCANNINK SECTORS...</span>}
+                      {sosStep > 2 && <span className="text-[10px] text-emerald-400 font-bold block mt-2">SECTOR LOCALIZED ✓</span>}
                     </div>
                  </div>
 
-                 {/* STEP 3: RESULTS & VOLUNTEERS */}
+                 {/* Final Step Results */}
                  {sosStep >= 3 && (
-                   <div className="pt-6 border-t border-white/5 space-y-6 animate-fadeIn">
-                       {/* SAFE ZONE SUGGESTION */}
-                       <div className="bg-emerald-500/10 border border-emerald-500/30 p-6 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.1)]">
-                          <span className="text-[9px] font-black text-emerald-400 tracking-[3px] uppercase block mb-3">Priority Safe Zone Identified</span>
-                          <h3 className="text-xl font-bold text-white mb-2">SECTOR 12 COMMUNAL HUB</h3>
-                          <p className="text-slate-400 text-xs mb-4">Located 2.4km from your current location. Reinforced structural integrity and 24h medical supply access.</p>
-                          <button className="flex items-center gap-3 bg-emerald-500 text-black px-6 py-3 rounded-xl font-black text-xs uppercase hover:bg-emerald-400 transition transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/30">
-                            Navigate to Safety <FaArrowRight />
+                   <div className="animate-fadeIn space-y-8 pt-4">
+                       <div className="bg-emerald-500/10 border-2 border-emerald-500/30 p-8 rounded-3xl shadow-[0_0_50px_rgba(16,185,129,0.15)]">
+                          <span className="text-[8px] font-black text-emerald-400 tracking-[5px] uppercase block mb-3">SAFE SECTOR IDENTIFIED</span>
+                          <h3 className="text-2xl font-black text-white mb-2">SECTOR-12 COMMUNAL HUB</h3>
+                          <p className="text-slate-400 text-xs mb-6">Reinforced emergency base located 2.4km from current coordinates.</p>
+                          <button className="w-full bg-emerald-500 text-black py-4 rounded-2xl font-black text-sm uppercase flex items-center justify-center gap-4 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-emerald-500/20">
+                             Navigate To Safety <FaArrowRight />
                           </button>
                        </div>
 
-                       {/* VOLUNTEER MESSAGE */}
-                       <div className="flex items-center gap-4 bg-slate-900/50 border border-white/10 p-4 rounded-xl">
-                          <FaUsers className="text-blue-400 text-2xl animate-pulse" />
-                          <div>
-                            <p className="text-white font-bold text-xs">Volunteer Shield Force Activated</p>
-                            <p className="text-slate-500 text-[10px]">124 Local Volunteers have been alerted and are currently safeguarding evacuation routes.</p>
+                       <div className="flex items-center gap-4 bg-slate-900/50 p-5 rounded-2xl border border-white/5">
+                          <FaUsers className="text-3xl text-blue-400 animate-pulse" />
+                          <div className="flex-1 text-slate-300">
+                             <p className="text-xs font-bold uppercase tracking-widest text-white">Volunteer Deployment Active</p>
+                             <p className="text-[10px] mt-1 italic">124 Safeguard Volunteers have established security cordons along the route.</p>
                           </div>
-                          <FaShieldAlt className="ml-auto text-emerald-400" />
+                          <FaShieldAlt className="text-emerald-400 text-2xl" />
                        </div>
                    </div>
                  )}
               </div>
 
-              {/* Footer Banner */}
-              <div className="bg-slate-900 border-t border-white/5 p-4 flex items-center justify-center gap-4">
-                 <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
-                 <span className="text-[10px] font-black text-slate-500 tracking-[5px] uppercase">Official Response Protocol V2.1</span>
+              {/* FOOTER: TERMINATE BUTTON (Critical for User Experience) */}
+              <div className="bg-slate-950/95 border-t border-white/5 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shrink-0 mt-auto">
+                 <div className="hidden md:flex items-center gap-4">
+                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span>
+                    <span className="text-[9px] font-black text-slate-500 tracking-[3px] uppercase">Secure Response Protocol V2.2</span>
+                 </div>
+                 <button 
+                  onClick={closeSOS}
+                  className="w-full md:w-auto px-12 py-4 bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-500/40 rounded-2xl font-black text-xs uppercase tracking-[2px] transition-all hover:scale-105 active:scale-95 shadow-xl shadow-red-500/10"
+                 >
+                    Terminate SOS Protocol
+                 </button>
               </div>
            </div>
         </div>
       )}
 
-      {/* GLOBAL PRODUCTION TICKER */}
-      <div className="lp-ticker-wrapper bg-red-600/10 border-y border-red-500/20 py-2 overflow-hidden whitespace-nowrap mb-4">
-        <div className="lp-ticker-content animate-marquee inline-block text-[10px] font-black tracking-widest text-red-500!">
-           {news.length > 0 ? news.map(n => ` [ BREAKING: ${n.title.toUpperCase()} ] • `).join("") : " [ INITIALIZING GLOBAL DISASTER STREAM... ] "}
+      {/* ALERT MARQUEE */}
+      <div className="lp-ticker-wrapper bg-red-600/10 border-y border-red-500/10 py-2.5 overflow-hidden whitespace-nowrap mb-3 relative z-10">
+        <div className="lp-ticker-content animate-marquee inline-block text-[10px] font-black tracking-[2px] text-red-500!">
+           {news.length > 0 ? news.map(n => ` [ BREAKING: ${n.title.toUpperCase()} ] • `).join("") : " [ CONNECTING TO INDIA DISASTER STREAM... ] "}
         </div>
       </div>
 
-      <div className="lp-news-card lp-fade-in shadow-[0_0_80px_rgba(239,68,68,0.15)] ring-1 ring-white/10">
+      <div className="lp-news-card lp-fade-in shadow-[0_0_80px_rgba(239,68,68,0.1)] ring-1 ring-white/10">
         <div className="lp-news-header">
           <FaNewspaper className="lp-news-icon text-red-500!" />
           <div>
-            <h3 className="font-black">LIVE REAL-TIME DATA (IND)</h3>
-            <p className="opacity-60">India Regional Neural Matrix</p>
+            <h3 className="font-black text-xs md:text-sm tracking-widest text-[#fff]">REAL-TIME INDIA FEED</h3>
+            <p className="text-[9px] opacity-60 uppercase font-bold tracking-widest">Global Matrix [IND]</p>
           </div>
           <div className={`lp-news-live-tag ${error ? 'bg-orange-600/20! text-orange-400!' : 'bg-red-600/20! text-red-400! animate-pulse'}`}>
-            {error ? 'OFFLINE MODE' : 'SYSTEM LIVE'}
+            <span className="text-[9px] font-black uppercase tracking-widest">{error ? 'OFFLINE' : 'LIVE'}</span>
           </div>
         </div>
 
@@ -213,7 +210,7 @@ export function DisasterNewsCard() {
           {loading ? (
             <div className="lp-news-loading">
               <div className="lp-news-spinner"></div>
-              <p className="font-black text-[10px] tracking-widest">CONNECTING TO SATELLITE UPLINK...</p>
+              <p className="font-black text-[10px] tracking-widest opacity-60">Handshake Uplink...</p>
             </div>
           ) : (
             <div className="lp-news-list">
@@ -225,29 +222,29 @@ export function DisasterNewsCard() {
                     </div>
                   )}
                   
-                  <div className="lp-news-item-top flex justify-between items-center pr-16">
-                    <span className="lp-news-tag text-red-500! font-black">{item.type}</span>
-                    <span className="lp-news-date opacity-50 font-mono text-[9px]">{item.date === "Awaiting Stream..." ? new Date().toLocaleDateString() : item.date}</span>
+                  <div className="lp-news-item-top flex justify-between items-center pr-16 mb-2">
+                    <span className="lp-news-tag text-red-500! font-black text-[9px]">{item.type}</span>
+                    <span className="lp-news-date opacity-50 font-bold text-[8px]">{item.date === "Awaiting Stream..." ? new Date().toLocaleDateString() : item.date}</span>
                   </div>
-                  <h4 className="text-sm font-bold tracking-tight mb-1 group-hover:text-red-400 transition-colors uppercase">{item.title}</h4>
-                  <p className="lp-news-loc text-cyan-400! font-black text-[10px] mb-2 flex items-center gap-1">
-                    <FaMapMarkerAlt /> {item.location.toUpperCase()}
+                  <h4 className="text-[14px] md:text-sm font-black tracking-tight mb-2 group-hover:text-red-400 transition-colors uppercase leading-tight">{item.title}</h4>
+                  <p className="lp-news-loc text-cyan-400! font-black text-[9px] mb-2 flex items-center gap-1">
+                    <FaMapMarkerAlt className="text-[10px]" /> {item.location.toUpperCase()}
                   </p>
-                  <p className="lp-news-desc text-xs text-slate-400 leading-relaxed group-hover:text-slate-200 transition-colors">{item.description}</p>
+                  <p className="lp-news-desc text-[11px] md:text-xs text-slate-500 leading-relaxed font-bold group-hover:text-slate-200 transition-all">{item.description}</p>
                   
                   <button 
                     onClick={handleProtocolClick}
-                    className="lp-news-action-btn mt-3 group-hover:bg-red-600! group-hover:text-white! group-hover:border-red-400! transition-all duration-300 transform active:scale-95"
+                    className="lp-news-action-btn w-full mt-5 group-hover:bg-red-600! group-hover:text-white! group-hover:border-red-400! transition-all duration-300 transform active:scale-95 text-[10px] font-black tracking-[2px] py-4 rounded-xl border border-white/5 shadow-xl"
                   >
-                    INITIALIZE PRE-ACTION PROTOCOL <FaExternalLinkAlt />
+                    INITIALIZE PROTOCOL <FaExternalLinkAlt className="ml-2" />
                   </button>
                 </div>
               ))}
             </div>
           )}
         </div>
-        <div className="lp-news-footer border-t border-white/5! py-3 text-[9px] font-black text-slate-500! tracking-[4px] uppercase text-center mt-2">
-            Regional Analysis Hub — Alpha Section (IND)
+        <div className="lp-news-footer border-t border-white/5! py-3 text-[9px] font-black text-slate-500/60! tracking-[4px] uppercase text-center mt-2">
+            Regional Hub — Crisis Response HQ
         </div>
       </div>
     </div>
