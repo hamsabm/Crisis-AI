@@ -21,8 +21,6 @@ services:
     depends_on:
       - mongodb
       - redis
-    env_file:
-      - .env.development
     environment:
       - MONGODB_URI=mongodb://admin:${MONGO_PASSWORD:-secret}@mongodb:27017/crisisiq?authSource=admin
       - REDIS_URL=redis://:${REDIS_PASSWORD:-secret}@redis:6379
@@ -39,8 +37,6 @@ services:
       - "8000:8000"
     depends_on:
       - redis
-    env_file:
-      - .env.development
     environment:
       - REDIS_HOST=redis
       - REDIS_PASSWORD=${REDIS_PASSWORD:-secret}
