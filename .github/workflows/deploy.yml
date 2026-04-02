@@ -76,7 +76,7 @@ jobs:
         touch .env
 
     - name: Validate docker-compose syntax
-      run: docker compose config
+      run: docker compose -f docker-compose.dev.yml config
 
   build-and-push:
     needs: [test, validate-compose]
