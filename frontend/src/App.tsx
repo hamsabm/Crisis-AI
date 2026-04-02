@@ -36,16 +36,7 @@ const ProtectedCitizenRoute = ({ children }: { children: React.ReactNode }) => {
 
 function App() {
   useEffect(() => {
-    toast('Backend is currently unavailable during production (Working in Local)', {
-      icon: '⚠️',
-      duration: 8000,
-      style: {
-        background: '#0c1829',
-        color: '#fff',
-        border: '1px solid #334155',
-        boxShadow: '0 0 20px rgba(255, 68, 68, 0.2)'
-      }
-    });
+    // Backend connection check can be added here if needed in the future
   }, []);
 
   return (
