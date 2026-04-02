@@ -1,13 +1,12 @@
-import { Alert } from '../models/Alert.js';
+import { alertStore } from '../config/memoryStore.js';
 
-export const getAlerts = async (req, res) => {
+export const getAlerts = async (req: any, res: any) => {
   try {
     const { status, limit } = req.query;
     const query = status ? { status } : {};
     const parsedLimit = Math.min(Number(limit) || 50, 200);
 
-    const alerts = await Alert.find(query)
-      .sort({ createdAt: -1 })
+    const alerts = await (await alertStore.find(query))
       .limit(parsedLimit);
 
     res.json(alerts);
@@ -16,11 +15,10 @@ export const getAlerts = async (req, res) => {
   }
 };
 
-export const getActiveAlerts = async (req, res) => {
+export const getActiveAlerts = async (req: any, res: any) => {
   try {
     const limit = Math.min(Number(req.query.limit) || 50, 200);
-    const alerts = await Alert.find({ status: 'active' })
-      .sort({ createdAt: -1 })
+    const alerts = await (await alertStore.find({ status: 'active' }))
       .limit(limit);
     res.json(alerts);
   } catch (error) {

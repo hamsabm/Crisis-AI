@@ -13,25 +13,15 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { authenticate } from './middleware/auth.js';
 import mongoose from 'mongoose';
 import { ApolloServer } from '@apollo/server';
-// @ts-ignore
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs } from './graphql/schema.js';
 import { resolvers } from './graphql/resolvers.js';
 import { startDataIngestion } from './services/dataIngestion.js';
 import { alertProcessor } from './services/alertProcessor.js';
 
-// Connect to MongoDB
-let mongoReady = false;
-
-mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/crisisiq')
-  .then(() => {
-    mongoReady = true;
-    console.log('Connected to MongoDB');
-  })
-  .catch(err => {
-    console.error('MongoDB connection error:', err);
-  });
+// In-memory mode (No MongoDB connection required)
+const mongoReady = true;
+console.log('Connected to Memory Store');
 
 const app = express();
 const httpServer = createServer(app);
@@ -64,8 +54,7 @@ app.use(express.json({ limit: '10mb' }));
 // Basic service health endpoints (used by Kubernetes probes)
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 app.get('/ready', (req, res) => {
-  const ready = mongoReady;
-  res.status(ready ? 200 : 503).json({ ready, mongoReady });
+  res.status(200).json({ ready: true, mode: 'demo' });
 });
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
