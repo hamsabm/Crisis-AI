@@ -1,13 +1,19 @@
 import openai  # type: ignore
-from typing import Dict, List
+from typing import List
 import json
 import os
 
 class LLMService:
     def __init__(self):
-        # We need a fallback if key not present to avoid crashing instances during testing
-        api_key = os.getenv('OPENAI_API_KEY', 'fake-key')
-        self.client = openai.AsyncOpenAI(api_key=api_key)
+        self.use_mock = os.getenv('USE_MOCK_LLM', 'false').lower() == 'true'
+        api_key = os.getenv('OPENAI_API_KEY', '')
+        
+        if not self.use_mock and not api_key:
+            print("OPENAI_API_KEY not found. Falling back to Mock LLM mode.")
+            self.use_mock = True
+            
+        if not self.use_mock:
+            self.client = openai.AsyncOpenAI(api_key=api_key)
         self.model = "gpt-4-turbo-preview"
     
     async def generate_recommendations(
@@ -23,6 +29,9 @@ class LLMService:
             disaster_type, severity, impact, context
         )
         
+        if self.use_mock:
+            return self._fallback_recommendations(disaster_type, severity)
+            
         try:
             response = await self.client.chat.completions.create(
                 model=self.model,
@@ -93,6 +102,9 @@ class LLMService:
         return [r for i, r in enumerate(recommendations) if i < 7]
     
     async def chat_with_assistant(self, message: str) -> str:
+        if self.use_mock:
+            return "I am operating in mock mode because no API key was provided. I am here to assist!"
+            
         try:
             response = await self.client.chat.completions.create(
                 model=self.model,
@@ -171,6 +183,9 @@ class LLMService:
         Keep it informative but not sensationalized.
         """
         
+        if self.use_mock:
+            return "Mock narrative: This is a simulated disaster generated for demonstration purposes."
+            
         try:
             response = await self.client.chat.completions.create(
                 model=self.model,

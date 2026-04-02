@@ -1,7 +1,6 @@
-import numpy as np  # type: ignore
-from sklearn.ensemble import GradientBoostingClassifier  # type: ignore
 import joblib  # type: ignore
-from typing import Dict
+import aiohttp  # type: ignore
+import os
 import aiohttp  # type: ignore
 import os
 
@@ -36,7 +35,7 @@ class RiskAssessmentService:
         """Load pre-trained risk model or create default"""
         try:
             return joblib.load('models/risk_model.joblib')
-        except:
+        except Exception:
             # Return a simple rule-based fallback
             return None
     
@@ -87,7 +86,7 @@ class RiskAssessmentService:
         coords = location.get('coordinates', [0, 0])
         
         async with aiohttp.ClientSession() as session:
-            url = f"https://api.openweathermap.org/data/2.5/weather"
+            url = "https://api.openweathermap.org/data/2.5/weather"
             params = {
                 'lat': coords[1],
                 'lon': coords[0],

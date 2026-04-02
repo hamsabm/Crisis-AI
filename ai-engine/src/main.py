@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
 import redis
 import json
 import os
@@ -32,7 +32,8 @@ redis_client = redis.Redis(
 
 @app.get("/health")
 async def health() -> dict:
-    return {"status": "ok"}
+    mode = "demo" if os.getenv("USE_MOCK_LLM", "false").lower() == "true" else "live"
+    return {"status": "ok", "mode": mode}
 
 @app.get("/ready")
 async def ready() -> dict:

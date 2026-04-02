@@ -1,7 +1,6 @@
 import aiohttp  # type: ignore
-from typing import List, Dict, Optional
+from typing import List
 import os
-import polyline  # type: ignore
 
 class EvacuationPlanner:
     def __init__(self):

@@ -1,23 +1,40 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaUser, FaFireExtinguisher, FaArrowLeft, FaServer } from 'react-icons/fa';
+import { useAuthStore } from '../stores/authStore';
 import type { UserRole } from '../App';
 
-interface LoginPageProps {
-  onLogin: (role: UserRole) => void;
-  onBack: () => void;
-}
-
-export function LoginPage({ onLogin, onBack }: LoginPageProps) {
+export function LoginPage() {
+  const navigate = useNavigate();
+  const loginFn = useAuthStore(state => state.login);
+  
   const [selectedRole, setSelectedRole] = useState<UserRole>(null);
   const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
     if (!selectedRole) return;
     setLoading(true);
+    
+    // Simulate login & set authState
     setTimeout(() => {
-      onLogin(selectedRole);
+      loginFn({
+        id: `mock_id_${selectedRole}`,
+        email: `demo@${selectedRole.toLowerCase()}.crisisiq.com`,
+        role: selectedRole.toLowerCase() as 'citizen' | 'responder' | 'admin',
+        profile: {
+          name: `${selectedRole} User`
+        }
+      }, 'mock_access_token', 'mock_refresh_token');
+      
+      if (selectedRole === 'Responder' || selectedRole === 'Admin') {
+        navigate('/responder-dashboard');
+      } else {
+        navigate('/citizen-dashboard');
+      }
     }, 800);
   };
+
+  const onBack = () => navigate('/');
 
   return (
     <div className="min-h-screen bg-[#060d1a] text-slate-200 font-sans flex items-center justify-center relative overflow-hidden">

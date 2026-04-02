@@ -1,9 +1,0 @@
-﻿
-> frontend@0.0.0 build
-> tsc -b && vite build
-
-src/pages/Components.tsx(1,36): error TS6133: 'compact' is declared but its value is never read.
-src/pages/Components.tsx(13,33): error TS6133: 'props' is declared but its value is never read.
-src/pages/Components.tsx(16,35): error TS6133: 'props' is declared but its value is never read.
-src/pages/Components.tsx(19,36): error TS6133: 'props' is declared but its value is never read.
-src/services/api.ts(6,20): error TS6133: 'data' is declared but its value is never read.

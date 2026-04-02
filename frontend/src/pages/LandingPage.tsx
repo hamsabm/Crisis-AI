@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
-export function LandingPage({ onLaunch }: { onLaunch: () => void }) {
+export function LandingPage() {
+  const navigate = useNavigate();
+  const onLaunch = () => navigate('/login');
   const [counts, setCounts] = useState({ cnt1: 0, cnt2: 0, cnt3: 0, cnt4: 0 });
 
   useEffect(() => {
