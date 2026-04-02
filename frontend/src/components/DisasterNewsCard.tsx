@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaNewspaper, FaMapMarkerAlt, FaExternalLinkAlt, FaClock } from 'react-icons/fa';
+import { FaNewspaper, FaMapMarkerAlt, FaExternalLinkAlt, FaClock, FaExclamationCircle } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 interface NewsItem {
   title: string;
@@ -14,20 +15,20 @@ interface NewsItem {
 
 const FALLBACK_NEWS: NewsItem[] = [
   {
-    title: "Brahmaputra Basin Alert: Multiple Flooding Breakdown reported in Assam",
-    description: "Water levels have critically breached the danger mark in several districts. NDMA has issued high-priority evacuation warnings.",
+    title: "Brahmaputra Basin Alert: Multiple Flooding Breakdown in Assam",
+    description: "Water levels critically breached danger marks. NDMA issued high-priority evacuation warnings.",
     severity: "Critical",
     type: "Flood",
-    location: "Assam, India (Past 24H)",
+    location: "Assam, India",
     date: "Awaiting Stream...",
     isLive: false
   },
   {
-    title: "Cyclone Watch: Coastal Odisha Storm Probability at 74% ",
-    description: "Met department monitors a severe weather formation in the Bay of Bengal. Pre-positioning of disaster relief teams initiated.",
+    title: "Cyclone Watch: Coastal Odisha Storm Probability at 74%",
+    description: "Met department monitors severe weather formation in Bay of Bengal. Relief teams pre-positioning.",
     severity: "Warning",
     type: "Cyclone",
-    location: "Odisha, India (Past 24H)",
+    location: "Odisha, India",
     date: "Awaiting Stream...",
     isLive: false
   }
@@ -46,6 +47,24 @@ export function DisasterNewsCard() {
         setNews(liveNews);
         setLoading(false);
         setError(false);
+
+        // PRODUCTION POP-UP LOGIC: Alert only on Critical news
+        const criticalAlert = liveNews.find((n: any) => n.severity === 'Critical');
+        if (criticalAlert) {
+          toast.error(`BREAKING: ${criticalAlert.title}`, {
+            duration: 8000,
+            position: 'top-right',
+            style: {
+              background: '#ef4444',
+              color: '#fff',
+              fontWeight: 'bold',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.2)',
+              boxShadow: '0 20px 40px rgba(239, 68, 68, 0.4)'
+            },
+            icon: <FaExclamationCircle />
+          });
+        }
       } catch (err) {
         console.error('Failed to fetch disaster news:', err);
         setNews(FALLBACK_NEWS);
@@ -59,7 +78,7 @@ export function DisasterNewsCard() {
         fetchNews(position.coords.latitude, position.coords.longitude);
       }, (err) => {
         console.warn("Geolocation blocked, using default location (New Delhi, India).", err);
-        fetchNews(28.6139, 77.2090); // Default to New Delhi
+        fetchNews(28.6139, 77.2090);
       });
     } else {
       fetchNews(28.6139, 77.2090);
@@ -67,57 +86,63 @@ export function DisasterNewsCard() {
   }, []);
 
   return (
-    <div className="lp-news-card lp-fade-in shadow-[0_0_50px_rgba(239,68,68,0.1)]">
-      <div className="lp-news-header">
-        <FaNewspaper className="lp-news-icon text-red-500!" />
-        <div>
-          <h3>LIVE REAL-TIME DATA STREAM (INDIA)</h3>
-          <p>Analyzing Regional India Sensor Matrix</p>
-        </div>
-        <div className={`lp-news-live-tag ${error ? 'bg-orange-500/20! text-orange-400!' : 'animate-pulse'}`}>
-          {error ? 'OFFLINE INDIA MODE' : 'SYSTEM LIVE'}
+    <div className="flex flex-col gap-4">
+      {/* GLOBAL PRODUCTION TICKER */}
+      <div className="lp-ticker-wrapper bg-red-600/10 border-y border-red-500/20 py-2 overflow-hidden whitespace-nowrap mb-4">
+        <div className="lp-ticker-content animate-marquee inline-block text-[10px] font-black tracking-widest text-red-500!">
+           {news.length > 0 ? news.map(n => ` [ BREAKING: ${n.title.toUpperCase()} ] • `).join("") : " [ INITIALIZING GLOBAL DISASTER STREAM... ] "}
         </div>
       </div>
 
-      <div className="lp-news-content">
-        {loading ? (
-          <div className="lp-news-loading">
-            <div className="lp-news-spinner"></div>
-            <p>Decrypting Satellite Uplink...</p>
+      <div className="lp-news-card lp-fade-in shadow-[0_0_80px_rgba(239,68,68,0.15)] ring-1 ring-white/10">
+        <div className="lp-news-header">
+          <FaNewspaper className="lp-news-icon text-red-500!" />
+          <div>
+            <h3 className="font-black">LIVE REAL-TIME DATA (IND)</h3>
+            <p className="opacity-60">India Regional Neural Matrix</p>
           </div>
-        ) : (
-          <div className="lp-news-list">
-            {news.map((item, index) => (
-              <div key={index} className={`lp-news-item ${item.severity.toLowerCase()} relative overflow-hidden group`}>
-                {item.isLive && (
-                  <div className="absolute top-2 right-2 flex items-center gap-1.5 text-[8px] font-black bg-red-600/20 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded-full z-10">
-                    <span className="w-1 h-1 bg-red-400 rounded-full animate-ping"></span> INDIA-LIVE
+          <div className={`lp-news-live-tag ${error ? 'bg-orange-600/20! text-orange-400!' : 'bg-red-600/20! text-red-400! animate-pulse'}`}>
+            {error ? 'OFFLINE MODE' : 'SYSTEM LIVE'}
+          </div>
+        </div>
+
+        <div className="lp-news-content">
+          {loading ? (
+            <div className="lp-news-loading">
+              <div className="lp-news-spinner"></div>
+              <p className="font-black text-[10px] tracking-widest">CONNECTING TO SATELLITE UPLINK...</p>
+            </div>
+          ) : (
+            <div className="lp-news-list">
+              {news.map((item, index) => (
+                <div key={index} className={`lp-news-item ${item.severity.toLowerCase()} relative overflow-hidden group border border-white/5! hover:border-red-500/30! transition-all duration-300`}>
+                  {item.severity === 'Critical' && (
+                    <div className="absolute top-2 right-2 flex items-center gap-1.5 text-[8px] font-black bg-red-600 text-white border border-red-400/30 px-2 py-0.5 rounded-full z-10 shadow-lg">
+                      <FaExclamationCircle className="animate-pulse" /> URGENT
+                    </div>
+                  )}
+                  
+                  <div className="lp-news-item-top flex justify-between items-center pr-16">
+                    <span className="lp-news-tag text-red-500! font-black">{item.type}</span>
+                    <span className="lp-news-date opacity-50 font-mono text-[9px]">{item.date === "Awaiting Stream..." ? new Date().toLocaleDateString() : item.date}</span>
                   </div>
-                )}
-                {!item.isLive && (
-                  <div className="absolute top-2 right-2 flex items-center gap-1.5 text-[8px] font-black bg-slate-700/50 text-slate-400 border border-slate-600/30 px-1.5 py-0.5 rounded-full z-10">
-                    <FaClock className="text-[7px]" /> PAST 24H
-                  </div>
-                )}
-                <div className="lp-news-item-top flex justify-between items-center pr-12">
-                  <span className="lp-news-tag text-red-500! font-black">{item.type}</span>
-                  <span className="lp-news-date opacity-50">{item.date === "Awaiting Stream..." ? new Date().toLocaleDateString() : item.date}</span>
+                  <h4 className="text-sm font-bold tracking-tight mb-1 group-hover:text-red-400 transition-colors uppercase">{item.title}</h4>
+                  <p className="lp-news-loc text-cyan-400! font-black text-[10px] mb-2 flex items-center gap-1">
+                    <FaMapMarkerAlt /> {item.location.toUpperCase()}
+                  </p>
+                  <p className="lp-news-desc text-xs text-slate-400 leading-relaxed group-hover:text-slate-200 transition-colors">{item.description}</p>
+                  
+                  <button className="lp-news-action-btn mt-3 group-hover:bg-red-600! group-hover:text-white! group-hover:border-red-400! transition-all duration-300 transform active:scale-95">
+                    INITIALIZE PRE-ACTION PROTOCOL <FaExternalLinkAlt />
+                  </button>
                 </div>
-                <h4>{item.title}</h4>
-                <p className="lp-news-loc text-cyan-400!">
-                  <FaMapMarkerAlt className="text-xs" /> {item.location}
-                </p>
-                <p className="lp-news-desc italic opacity-80">{item.description}</p>
-                <button className="lp-news-action-btn group-hover:bg-red-600! group-hover:text-white! transition-all duration-300">
-                  INITIALIZE RESPONSE <FaExternalLinkAlt />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="lp-news-footer border-t border-red-500/10! py-2 text-xs font-black text-red-400/60! tracking-[3px] uppercase">
-        Verified through Neural Risk Analysis (IND)
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="lp-news-footer border-t border-white/5! py-3 text-[9px] font-black text-slate-500! tracking-[4px] uppercase text-center mt-2">
+            Regional Analysis Hub — Alpha Section (IND)
+        </div>
       </div>
     </div>
   );
