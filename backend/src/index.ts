@@ -9,6 +9,7 @@ import { authRouter } from './routes/auth.js';
 import { alertRouter } from './routes/alerts.js';
 import { scenarioRouter } from './routes/scenarios.js';
 import { chatRouter } from './routes/chat.js';
+import { disasterRouter } from './routes/disasters.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { authenticate } from './middleware/auth.js';
 import mongoose from 'mongoose';
@@ -66,6 +67,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/alerts', authenticate, alertRouter);
 app.use('/api/scenarios', authenticate, scenarioRouter);
 app.use('/api/chat', authenticate, chatRouter);
+app.use('/api/disasters', disasterRouter);
 
 // WebSocket connection handling
 // We skip full validation here for basic setup

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DisasterNewsCard } from '../components/DisasterNewsCard';
 import './LandingPage.css';
 
 export function LandingPage() {
@@ -216,23 +217,30 @@ export function LandingPage() {
           <div className="lp-orb lp-orb2"></div>
           <div className="lp-orb lp-orb3"></div>
         </div>
-        <div style={{position:'relative', zIndex: 1}}>
-          <div className="lp-hero-label"><span className="lp-blink">●</span> SYSTEM ONLINE — ALL SENSORS ACTIVE</div>
-          <h1 className="lp-hero-title">
-            <div className="lp-fade-in">CRISIS</div>
-            <div className="line2 lp-fade-in lp-delay-1">IQ</div>
-            <div className="line3 lp-fade-in lp-delay-2">AI-POWERED DISASTER RESPONSE</div>
-          </h1>
-          <p className="lp-hero-sub lp-fade-in lp-delay-3">Real-time disaster intelligence powered by AI. Monitor threats, coordinate responders, and protect communities — from a single command center.</p>
-          <div className="lp-hero-ctas lp-fade-in lp-delay-4">
-            <button className="lp-btn-primary" onClick={onLaunch}>Open Command Center</button>
-            <button className="lp-btn-outline" onClick={() => document.getElementById('simulation')?.scrollIntoView({behavior:'smooth'})}>Run Simulation</button>
+        
+        <div className="lp-hero-flex">
+          <div className="lp-hero-left">
+            <DisasterNewsCard />
           </div>
-          <div className="lp-hero-stats lp-fade-in lp-delay-4">
-            <div className="lp-stat"><div className="lp-stat-num">{counts.cnt1}</div><div className="lp-stat-label">ACTIVE INCIDENTS</div></div>
-            <div className="lp-stat"><div className="lp-stat-num">{counts.cnt2}</div><div className="lp-stat-label">RESPONDERS DEPLOYED</div></div>
-            <div className="lp-stat"><div className="lp-stat-num">{counts.cnt3.toLocaleString()}</div><div className="lp-stat-label">CITIZENS ALERTED</div></div>
-            <div className="lp-stat"><div className="lp-stat-num">{counts.cnt4}</div><div className="lp-stat-label">SAFE ZONES MAPPED</div></div>
+
+          <div className="lp-hero-center">
+            <div className="lp-hero-label"><span className="lp-blink">●</span> SYSTEM ONLINE — ALL SENSORS ACTIVE</div>
+            <h1 className="lp-hero-title">
+              <div className="lp-fade-in">CRISIS</div>
+              <div className="line2 lp-fade-in lp-delay-1">IQ</div>
+              <div className="line3 lp-fade-in lp-delay-2">AI-POWERED DISASTER RESPONSE</div>
+            </h1>
+            <p className="lp-hero-sub lp-fade-in lp-delay-3">Real-time disaster intelligence powered by AI. Monitor threats, coordinate responders, and protect communities — from a single command center.</p>
+            <div className="lp-hero-ctas lp-fade-in lp-delay-4">
+              <button className="lp-btn-primary" onClick={onLaunch}>Open Command Center</button>
+              <button className="lp-btn-outline" onClick={() => document.getElementById('simulation')?.scrollIntoView({behavior:'smooth'})}>Run Simulation</button>
+            </div>
+            <div className="lp-hero-stats lp-fade-in lp-delay-4">
+              <div className="lp-stat"><div className="lp-stat-num">{counts.cnt1}</div><div className="lp-stat-label">ACTIVE INCIDENTS</div></div>
+              <div className="lp-stat"><div className="lp-stat-num">{counts.cnt2}</div><div className="lp-stat-label">RESPONDERS DEPLOYED</div></div>
+              <div className="lp-stat"><div className="lp-stat-num">{counts.cnt3.toLocaleString()}</div><div className="lp-stat-label">CITIZENS ALERTED</div></div>
+              <div className="lp-stat"><div className="lp-stat-num">{counts.cnt4}</div><div className="lp-stat-label">SAFE ZONES MAPPED</div></div>
+            </div>
           </div>
         </div>
       </section>
