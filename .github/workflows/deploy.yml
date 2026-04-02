@@ -116,26 +116,17 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-south-1
-    
-    - name: Update kubeconfig
-      run: aws eks update-kubeconfig --name crisisiq-cluster --region ap-south-1
-    
-    - name: Deploy to Kubernetes
+    - name: Trigger Render Deployment (Frontend)
+      if: success()
       run: |
-        kubectl set image deployment/crisisiq-backend \
-          backend=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/backend:${{ github.sha }} \
-          -n crisisiq || true
-        kubectl set image deployment/crisisiq-frontend \
-          frontend=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/frontend:${{ github.sha }} \
-          -n crisisiq || true
-        kubectl set image deployment/crisisiq-ai-engine \
-          ai-engine=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/ai-engine:${{ github.sha }} \
-          -n crisisiq || true
+        curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}" || echo "Frontend hook not configured"
+        
+    - name: Trigger Render Deployment (Backend)
+      if: success()
+      run: |
+        curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}" || echo "Backend hook not configured"
+        
+    - name: Trigger Render Deployment (AI Engine)
+      if: success()
+      run: |
+        curl -X POST "${{ secrets.RENDER_AI_ENGINE_HOOK }}" || echo "AI Engine hook not configured"
